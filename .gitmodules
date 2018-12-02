@@ -1,0 +1,6 @@
+[submodule "FFmpeg-iOS-build-script"]
+	path = FFmpeg-iOS-build-script
+	url = https://github.com/JiangangYang/FFmpeg-iOS-build-script
+[submodule "x264-ios"]
+	path = x264-ios
+	url = https://github.com/JiangangYang/x264-ios
