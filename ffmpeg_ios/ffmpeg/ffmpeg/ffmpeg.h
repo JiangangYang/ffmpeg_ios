@@ -683,7 +683,7 @@ int hwaccel_decode_init(AVCodecContext *avctx);
 #ifdef __cplusplus
 extern "C"{
 #endif
-int ffmpeg_main(int argc, char **argv);
+int ffmpeg_main(int argc, char **argv,void (^progressBlock)(float seconds,int result));
 #ifdef __cplusplus
 }
 #endif

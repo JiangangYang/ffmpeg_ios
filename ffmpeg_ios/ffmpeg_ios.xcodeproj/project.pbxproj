@@ -544,16 +544,16 @@
 		F602947C21B4106F007ACBB9 /* ffmpeg */ = {
 			isa = PBXGroup;
 			children = (
+				F602948121B41070007ACBB9 /* config.h */,
+				F602948021B41070007ACBB9 /* ffmpeg.h */,
+				F602948621B41070007ACBB9 /* ffmpeg.c */,
 				F602947D21B4106F007ACBB9 /* cmdutils.h */,
 				F602947E21B4106F007ACBB9 /* ffmpeg_opt.c */,
 				F602947F21B4106F007ACBB9 /* mathops.h */,
-				F602948021B41070007ACBB9 /* ffmpeg.h */,
-				F602948121B41070007ACBB9 /* config.h */,
 				F602948221B41070007ACBB9 /* ffmpeg_filter.c */,
 				F602948321B41070007ACBB9 /* ffmpeg_hw.c */,
 				F602948421B41070007ACBB9 /* mathops.c */,
 				F602948521B41070007ACBB9 /* cmdutils.c */,
-				F602948621B41070007ACBB9 /* ffmpeg.c */,
 				F602948721B41070007ACBB9 /* ffmpeg_videotoolbox.c */,
 			);
 			path = ffmpeg;

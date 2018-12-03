@@ -11,11 +11,11 @@
 #include <libavformat/avformat.h>
 #include "ffmpeg.h"
 
-int ffmpeg_main(int argc, char **argv);
+int ffmpeg_main(int argc, char **argv,void (^progressBlock)(float seconds,int result));
 
 @implementation ffmpegTool
 
-+ (BOOL)ffmpeg:(NSString *)str
++ (BOOL)ffmpeg:(NSString *)str progress:(void(^)(float progress,int result))progress
 {
     @autoreleasepool {
         
@@ -33,7 +33,11 @@ int ffmpeg_main(int argc, char **argv);
             strcpy(argv[i],[[argv_array objectAtIndex:i] UTF8String]);
         }
         
-        int result = ffmpeg_main(argc, argv);
+        int result = ffmpeg_main(argc, argv, ^(float seconds,int result) {
+            if (progress) {
+                progress(seconds,result);
+            }
+        });
         
         for(int i=0 ; i < argc; i++)
             free(argv[i]);
@@ -43,41 +47,6 @@ int ffmpeg_main(int argc, char **argv);
         
         return !result;
         
-    }
-}
-
-+ (BOOL)gifToMp4:(NSString *)inputStr output:(NSString *)outputStr
-{
-    @autoreleasepool {
-        char *input = (char *)[inputStr UTF8String];
-        char *output = (char *)[outputStr UTF8String];
-        char* a[] = {
-            "ffmpeg",
-            "-f",
-            "gif",
-            "-i",
-            input,
-            output
-        };
-        return !ffmpeg_main(sizeof(a)/sizeof(*a), a);
-    }
-}
-
-+ (BOOL)transcode:(NSString *)str output:(NSString *)outputStr
-{
-    @autoreleasepool {
-        char *outPic = (char *)[outputStr UTF8String];
-        char *movie = (char *)[str UTF8String];
-        char *filter = "crop=in_w/2:in_h/2:(in_w-out_w)/2+((in_w-out_w)/2)*sin(n/10):(in_h-out_h)/2 +((in_h-out_h)/2)*sin(n/7)";
-        char* a[] = {
-            "ffmpeg",
-            "-i",
-            movie,
-            "-vf",
-            filter,
-            outPic
-        };
-        return !ffmpeg_main(sizeof(a)/sizeof(*a), a);
     }
 }
 

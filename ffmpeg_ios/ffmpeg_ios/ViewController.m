@@ -30,12 +30,16 @@
     //    BOOL result = [DCFFmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -f image2 -loop 1 -y -i %@ -c:a copy -s 1280x720 -r 30 -b:v 1.5M -pix_fmt yuv420p -t 4 -movflags faststart %@",BundlePath(@"100.png"),DocumentPath(@"output.mp4")]];
     
     // ffmpeg -r 25 -loop 1 -i ~/IMG_8679.JPG -pix_fmt yuv420p -vcodec libx264 -b:v 600k -r:v 25 -preset medium -crf 30 -s 720x576 -vframes 250 -r 25 -t 10 ~/a.mp4
-    //    BOOL result = [DCFFmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -r 25 -loop 1 -i %@ -pix_fmt yuv420p -vcodec libx264 -b:v 600k -r:v 25 -preset medium -crf 30 -s 720x576 -vframes 250 -r 25 -t 10 %@",BundlePath(@"100.png"),DocumentPath(@"output.mp4")]];
-    
+    BOOL result = [ffmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -i %@ -vcodec libx264 -b:v 600k -r:v 25 -s 720x576 -y %@",BundlePath(@"dongci.MP4"),DocumentPath(@"output.mp4")] progress:^(float progress,int result) {
+        NSLog(@"ffmpegTool_progress:%f result:%d",progress,result);
+    }];
+        
     // ffmpeg -loop 1 -i theLastImage.png -c:v libx264 -t 4 -pix_fmt yuv420p -vf scale=720:960 materialVideo.mp4
-//    BOOL result = [ffmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -loop 1 -i %@ -c:v libx264 -t 4 -pix_fmt yuv420p -vf scale=720:960 -y %@",BundlePath(@"dongci.png"),DocumentPath(@"output.mp4")]];
+//    BOOL result = [ffmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -loop 1 -i %@ -c:v libx264 -t 4 -pix_fmt yuv420p -s 720x1280 -vf transpose=1 -y %@",BundlePath(@"dongci.png"),DocumentPath(@"output.mp4")] progress:^(float progress) {
+//        NSLog(@"ffmpegTool_progress:%f",progress);
+//    }];
     
-    BOOL result = [ffmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -i %@ -c:v libx264 -b 200k -r 24 -vf scale=720:960 -y %@",BundlePath(@"dongci.MP4"),DocumentPath(@"output.mp4")]];
+//    BOOL result = [ffmpegTool ffmpeg:[NSString stringWithFormat:@"ffmpeg -i %@ -c:v libx264 -b 200k -r 24 -vf scale=720:960 -y %@",BundlePath(@"dongci.MP4"),DocumentPath(@"output.mp4")]];
     
     //    BOOL result = [DCFFmpegTool ffmpeg:@"ffmpeg --help full | grep loop"];
     
@@ -44,6 +48,7 @@
     //     BOOL result = [DCFFmpegTool ffmpeg:@"ffmpeg -formats"];
     
     NSLog(@"result:%d",result);
+    
 }
 
 
